@@ -24,3 +24,12 @@ spring.jpa.show-sql= true
 
 //auto create tables  
 spring.jpa.hibernate.ddl-auto=update
+
+## ADDED VALIDATION
+
+    <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+
