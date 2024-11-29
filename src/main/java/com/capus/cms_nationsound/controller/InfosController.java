@@ -1,6 +1,7 @@
 package com.capus.cms_nationsound.controller;
 
 import com.capus.cms_nationsound.entity.Information;
+import com.capus.cms_nationsound.exceptions.ApiException;
 import com.capus.cms_nationsound.service.InfosService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.capus.cms_nationsound.dto.responses.MyHttpResponse.response;
+import static com.capus.cms_nationsound.dto.responses.CustomHttpResponse.response;
+
 
 @AllArgsConstructor
 @RestController
@@ -32,14 +34,14 @@ public class InfosController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Information request) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Information request) throws ApiException {
 
         Information updatedInformation = infosService.update(id,request);
         return response(HttpStatus.CREATED,"Information updated",updatedInformation);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Object> deleteInfo(@PathVariable Long id){
+    public ResponseEntity<Object> deleteInfo(@PathVariable Long id) throws ApiException {
         return response(HttpStatus.OK,"Information deleted",infosService.deleteInformation(id));
     }
 }

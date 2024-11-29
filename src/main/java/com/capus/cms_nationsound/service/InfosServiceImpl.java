@@ -1,21 +1,19 @@
 package com.capus.cms_nationsound.service;
 
 import com.capus.cms_nationsound.entity.Information;
-import com.capus.cms_nationsound.exceptions.ResourceNotFoundException;
-import com.capus.cms_nationsound.repositary.InfosRepository;
+import com.capus.cms_nationsound.exceptions.ApiException;
+import com.capus.cms_nationsound.repository.InfosRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static com.capus.cms_nationsound.dto.responses.MyHttpResponse.response;
-
-@Service
 @AllArgsConstructor
+@Service
 public class InfosServiceImpl implements InfosService {
+
 
     private InfosRepository infosRepository;
 
@@ -25,14 +23,8 @@ public class InfosServiceImpl implements InfosService {
     }
 
     @Override
-    public Information deleteInformation(Long id) {
-//        if(infosRepository.existsById(id)) {
-//            infosRepository.deleteById(id);
-//            return " successfully deleted information with id " + id;
-//        }else {
-//            return "Information not found with id: " + id;
-//        }
-        Information informationDeleted =infosRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Id:"+id+" Not found in database"));
+    public Information deleteInformation(Long id) throws ApiException {
+        Information informationDeleted =infosRepository.findById(id).orElseThrow(()->new ApiException("Id:"+id+" Not found in database", HttpStatus.NOT_FOUND));
         infosRepository.deleteById(id);
         return informationDeleted;
     }
@@ -43,10 +35,12 @@ public class InfosServiceImpl implements InfosService {
     }
 
     @Override
-    public Information update(Long id,Information request) {
+    public Information update(Long id,Information request) throws ApiException {
         Information information = infosRepository
                 .findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Id:"+id+" Not found in database"));
+        //          .orElseThrow(()->new ResourceNotFoundException("Id:"+id+" Not found in database"));
+        .orElseThrow(()->new ApiException("Id:"+id+" Not found in database", HttpStatus.NOT_FOUND));
+
         information.setId(id);
         information.setMessage(request.getMessage());
         information.setImportant(request.isImportant());

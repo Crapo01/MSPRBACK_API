@@ -1,4 +1,4 @@
-package com.capus.cms_nationsound.repositary;
+package com.capus.cms_nationsound.repository;
 
 import com.capus.cms_nationsound.entity.Information;
 import org.springframework.data.jpa.repository.JpaRepository;
