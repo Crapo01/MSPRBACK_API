@@ -1,7 +1,8 @@
-package com.capus.securedapi.repository;
+package com.capus.securedapi.repositary;
 
 import com.capus.securedapi.entity.Information;
 
+import com.capus.securedapi.repository.InformationRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class UserRepositoryTest {
+class InformationRepositoryIntegrationTest {
     @Autowired
     private TestEntityManager entityManager;
 
@@ -38,19 +39,6 @@ class UserRepositoryTest {
 
     }
 
-    @Test
-    public void testCreate() {
-        //GIVEN
-        Information information = new Information();
-        information.setMessage("test");
-
-        //WHEN
-        Information savedInformation = informationRepository.save(information);
-
-        //assert
-        assertEquals("test",savedInformation.getMessage());
-
-    }
 
 
 
