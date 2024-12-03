@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "Access rights", description = "User's right/roles test APIs")
+@Tag(name = "User roles", description = "User's roles test APIs")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/access")
+@RequestMapping("/api/test")
 public class TestController {
 
   @ApiResponses({

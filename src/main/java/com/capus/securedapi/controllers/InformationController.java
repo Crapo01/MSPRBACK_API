@@ -59,10 +59,9 @@ public class InformationController {
             tags = { "All access allowed" })
     @GetMapping("all")
     // ALL authorized
-    public ResponseEntity<List<Information>> getAllInformation() {
+    public ResponseEntity<Object> getAllInformation() {
         List<Information> informations = informationService.getAllInformation();
-        //return response(HttpStatus.OK,"All Informations returned",informations);
-        return ResponseEntity.ok(informations);
+        return response(HttpStatus.OK,"All Informations returned",informations);
     }
 
     @ApiResponses({

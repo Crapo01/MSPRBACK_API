@@ -80,9 +80,9 @@ public class ConcertController {
 			description = "All access allowed.",
 			tags = { "All access allowed" })
 	// ALL authorized
-	public ResponseEntity<List<Concert>> getAllConcerts() {
+	public ResponseEntity<Object> getAllConcerts() {
 		List<Concert> concerts = concertService.getAllConcerts();
-		return ResponseEntity.ok(concerts);
+		return response(HttpStatus.OK,"All Concert returned",concerts);
 	}
 
 	@ApiResponses({
