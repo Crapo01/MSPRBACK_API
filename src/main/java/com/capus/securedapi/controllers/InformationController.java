@@ -68,7 +68,7 @@ public class InformationController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = { @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Information.class)) }),
-            @ApiResponse(responseCode = "400", description = "No Information found with id: +id")
+            @ApiResponse(responseCode = "404", description = "No Information found with id: +id")
     })
     @Operation(
             summary = "Update an info by ID",
@@ -84,7 +84,7 @@ public class InformationController {
 
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Deleted Information "),
-            @ApiResponse(responseCode = "400", description = "No Information found with id: +id")
+            @ApiResponse(responseCode = "404", description = "No Information found with id: +id")
     })
     @Operation(
             summary = "Delete an info by ID",

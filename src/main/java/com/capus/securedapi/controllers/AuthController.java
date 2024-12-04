@@ -273,7 +273,7 @@ public class AuthController {
       });
     }
     User updatedUser = userService.updateUser(id, roles);
-    return ResponseEntity.ok(new MessageResponse("User " + updatedUser.getRoles().toString() + " updated successfully!"));
+    return ResponseEntity.ok(new MessageResponse("User " + updatedUser.getId().toString() + " updated successfully!"));
   }
 
   @Operation(
