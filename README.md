@@ -1,5 +1,9 @@
 # MSPR2 nationsound API MYSQL
 
+# API DOCUMENTATION
+
+https://msprback-cms-reworked.onrender.com/swagger-ui/index.html
+
 ## DEPLOY PROJECT FROM GITHUB
 
 clone repo or get zipfile from github
