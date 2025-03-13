@@ -102,8 +102,8 @@ resource:
 
 ## SWAGGER
 
-Navigate to http://localhost:8080/swagger-ui.html
-
+Navigate to <base_url>/swagger-ui.html
+https://msprback-cms-reworked.onrender.com/swagger-ui/index.html 
 
 
     <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
