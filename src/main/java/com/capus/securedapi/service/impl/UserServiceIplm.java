@@ -3,10 +3,12 @@ package com.capus.securedapi.service.impl;
 import com.capus.securedapi.dto.UserDetailsDto;
 import com.capus.securedapi.entity.Role;
 import com.capus.securedapi.entity.User;
+import com.capus.securedapi.exceptions.ApiException;
 import com.capus.securedapi.mapper.UserMapper;
 import com.capus.securedapi.repository.UserRepository;
 import com.capus.securedapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,10 +30,10 @@ public class UserServiceIplm implements UserService {
     }
 
     @Override
-    public User updateUser(Long id,Set<Role> roles) {
+    public User updateUser(Long id,Set<Role> roles) throws ApiException {
         User user = userRepository
                 .findById(id)
-                .orElseThrow(()->new RuntimeException("API ERROR: No User found"));
+                .orElseThrow(()->new ApiException("Id:" + id + " Not found in database", HttpStatus.NOT_FOUND));
         user.setRoles(roles);
         userRepository.save(user);
 
@@ -39,10 +41,10 @@ public class UserServiceIplm implements UserService {
     }
 
     @Override
-    public void deleteUser(Long id) {
+    public void deleteUser(Long id) throws ApiException {
         User user = userRepository
                 .findById(id)
-                .orElseThrow(()->new RuntimeException("API ERROR:No User found"));
+                .orElseThrow(()->new ApiException("Id:" + id + " Not found in database", HttpStatus.NOT_FOUND));
         userRepository.delete(user);
     }
 }

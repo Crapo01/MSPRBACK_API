@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.capus.securedapi.dto.UserDetailsDto;
 import com.capus.securedapi.dto.UserRoleUpdateDto;
+import com.capus.securedapi.exceptions.ApiException;
 import com.capus.securedapi.payload.request.CaptchaToken;
 import com.capus.securedapi.payload.response.CaptchaResponseType;
 import com.capus.securedapi.payload.response.CustomHttpResponse;
@@ -51,6 +52,9 @@ import com.capus.securedapi.repository.UserRepository;
 import com.capus.securedapi.security.jwt.JwtUtils;
 import com.capus.securedapi.security.services.UserDetailsImpl;
 import org.springframework.web.client.RestTemplate;
+
+import static com.capus.securedapi.payload.response.CustomHttpResponse.response;
+
 @Tag(name = "Authentication and admin", description = "Authentication and accounts management APIs")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -186,9 +190,9 @@ public class AuthController {
           tags = { "Admin only" })
   @GetMapping("all")
   @PreAuthorize("hasRole('ADMIN')")
-  public ResponseEntity<List<UserDetailsDto>> getAll() {
+  public ResponseEntity<?> getAll() {
     List<UserDetailsDto> user = userService.getAllUsers();
-    return ResponseEntity.ok(user);
+    return response(HttpStatus.OK,"User found",user);
   }
 
   @ApiResponses({
@@ -201,16 +205,14 @@ public class AuthController {
           tags = { "Admin only" })
   @DeleteMapping("{id}")
   @PreAuthorize("hasRole('ADMIN')")
-  public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+  public ResponseEntity<?> deleteUser(@PathVariable Long id) throws ApiException {
     logger.info("delete end point reached");
     logger.info(id.toString());
     if (!userRepository.existsById(id)) {
-      return ResponseEntity
-              .badRequest()
-              .body(new MessageResponse("Error: No User found!"));
+      return response(HttpStatus.NOT_FOUND,"User not found",id);
     }
     userService.deleteUser(id);
-    return ResponseEntity.ok(new MessageResponse("User deleted successfully!"));
+    return response(HttpStatus.OK,"User deleted successfully!",id);
   }
 
   @ApiResponses({
@@ -225,7 +227,7 @@ public class AuthController {
           tags = { "Admin only" })
   @PutMapping("{id}")
   @PreAuthorize("hasRole('ADMIN')")
-  public ResponseEntity<?> updateUserRole(@PathVariable Long id,@Valid @RequestBody UserRoleUpdateDto userRoleUpdateDto) {
+  public ResponseEntity<?> updateUserRole(@PathVariable Long id,@Valid @RequestBody UserRoleUpdateDto userRoleUpdateDto) throws ApiException {
     logger.info("update end point reached");
     logger.info(id.toString());
     if (!userRepository.existsById(id)) {

@@ -35,6 +35,7 @@ public class  User {
   private String email;
 
   @NotBlank
+  @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$@!%&*?])[A-Za-z\\d#$@!%&*?]{8,}$")
   private String password;
 
   @ManyToMany(fetch = FetchType.LAZY)
