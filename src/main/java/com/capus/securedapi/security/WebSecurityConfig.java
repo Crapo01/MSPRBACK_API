@@ -106,6 +106,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                         .requestMatchers("/api/pointeurs/**").permitAll()
                         .requestMatchers("/ws-endpoint/**").permitAll()
                         .requestMatchers("/app/**").permitAll()
+                        .requestMatchers("/*").permitAll()
                         .requestMatchers(SWAGGER_WHITELIST).permitAll()
                         .anyRequest().authenticated()
         );
