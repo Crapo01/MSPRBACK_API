@@ -149,18 +149,19 @@ public class AuthController {
     } else {
       strRoles.forEach(role -> {
         switch (role) {
-          case "admin":
-            Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(adminRole);
-
-            break;
-          case "editor":
-            Role editorRole = roleRepository.findByName(ERole.ROLE_EDITOR)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(editorRole);
-
-            break;
+          // security issue fix: only admins can give editor or admin roles
+//          case "admin":
+//            Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+//                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+//            roles.add(adminRole);
+//
+//            break;
+//          case "editor":
+//            Role editorRole = roleRepository.findByName(ERole.ROLE_EDITOR)
+//                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+//            roles.add(editorRole);
+//
+//            break;
 
           case "viewer":
             Role viewerRole = roleRepository.findByName(ERole.ROLE_VIEWER)
