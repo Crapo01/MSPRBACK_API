@@ -16,6 +16,8 @@ public class SignupRequest {
   @Email
   private String email;
 
+  // editor and admin role can only be allowed by admins
+  @Schema(description = "Set of roles available at signup", allowableValues = {"viewer","none" } ,example = "[\"viewer\",\"none\"]")
   private Set<String> role;
 
   @NotBlank
@@ -46,7 +48,7 @@ public class SignupRequest {
   public void setPassword(String password) {
     this.password = password;
   }
-  @Schema(description = "Set of roles to update", allowableValues = {"viewer","admin","editor","none" } ,example = "[\"viewer\",\"admin\",\"editor\",\"none\"]")
+
   public Set<String> getRole() {
     return this.role;
   }
