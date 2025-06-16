@@ -96,7 +96,7 @@ public class AuthController {
   @Operation(
           summary = "Get user details in DB",
           description = "All access allowed.Look for user in DB and return user's details if found",
-          tags = { "All access allowed" })
+          tags = { "All access allowed", "demo soutenance" })
   @PostMapping("signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -124,7 +124,7 @@ public class AuthController {
   @Operation(
           summary = "Create a new user with encrypted password in DB",
           description = "All access allowed.User registration will give \"none\" role by default and add user in DB ",
-          tags = { "All access allowed" })
+          tags = { "All access allowed", "demo soutenance" })
   @PostMapping("signup")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())||userRepository.existsByEmail(signUpRequest.getEmail())) {
@@ -142,7 +142,7 @@ public class AuthController {
     Set<String> strRoles = signUpRequest.getRole();
     Set<Role> roles = new HashSet<>();
 
-    if (strRoles == null) {
+    if (strRoles == null || strRoles.isEmpty()) {
       Role noneRole = roleRepository.findByName(ERole.ROLE_NONE)
               .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
       roles.add(noneRole);

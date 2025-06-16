@@ -49,7 +49,7 @@ public class TestController {
   @Operation(
           summary = "Return access status",
           description = "ONLY FOR EDITORS.The response is a string describing user's access rights.",
-          tags = { "Editor only" })
+          tags = { "Editor only", "demo soutenance" })
   @GetMapping("/editor")
   @PreAuthorize("hasRole('EDITOR')")
   public String editorAccess() {
