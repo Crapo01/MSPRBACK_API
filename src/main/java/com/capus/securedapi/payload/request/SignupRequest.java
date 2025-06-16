@@ -17,7 +17,7 @@ public class SignupRequest {
   private String email;
 
   // editor and admin role can only be allowed by admins
-  @Schema(description = "Set of roles available at signup", allowableValues = {"viewer","none" } ,example = "[\"viewer\"")
+  @Schema(description = "Set of roles available at signup", allowableValues = {"viewer","none" } ,example = "[\"viewer\"]")
   private Set<String> role;
 
   @NotBlank
