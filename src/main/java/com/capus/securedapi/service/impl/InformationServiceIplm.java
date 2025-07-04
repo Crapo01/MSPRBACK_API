@@ -43,7 +43,7 @@ public class InformationServiceIplm implements InformationService {
 
         information.setId(id);
         information.setMessage(request.getMessage());
-        information.setImportant(request.isImportant());
+        information.setPriority(request.isPriority());
         return infosRepository.save(information);
     }
 }
