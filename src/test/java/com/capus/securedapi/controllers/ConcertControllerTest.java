@@ -37,8 +37,8 @@ public class ConcertControllerTest {
     void setup() {
         concertRepository.deleteAll();
         concertRepository.saveAll(List.of(
-                new Concert(null,"first","","","","","","",""),
-                new Concert(null,"second","","","","","","","")
+                new Concert(null,"first","","","","","","","",""),
+                new Concert(null,"second","","","","","","","","")
         ));
     }
 
@@ -76,8 +76,8 @@ public class ConcertControllerTest {
     @Test
     @WithMockUser(roles = "EDITOR")
     void shouldUpdateConcert() throws Exception {
-        Concert savedConcert = concertRepository.save(new Concert(null,"old","","","","","","",""));
-        Concert updatedConcert = concertRepository.save(new Concert(null,"new","","","","","","",""));
+        Concert savedConcert = concertRepository.save(new Concert(null,"old","","","","","","","",""));
+        Concert updatedConcert = concertRepository.save(new Concert(null,"new","","","","","","","",""));
 
         mockMvc.perform(put("/api/concerts/update/" + savedConcert.getId())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -90,7 +90,7 @@ public class ConcertControllerTest {
     @Test
     @WithMockUser(roles = "EDITOR")
     void shouldDeleteInformation() throws Exception {
-        Concert savedConcert = concertRepository.save(new Concert(null,"RIP","","","","","","",""));
+        Concert savedConcert = concertRepository.save(new Concert(null,"RIP","","","","","","","",""));
 
         mockMvc.perform(delete("/api/concerts/"+savedConcert.getId()))
                 .andExpect(status().isOk())
