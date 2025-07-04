@@ -1,7 +1,7 @@
 package com.capus.securedapi.controllers;
 
 
-import com.capus.securedapi.entity.Pointeur;
+import com.capus.securedapi.entity.Pointer;
 import com.capus.securedapi.repository.PointeurRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,8 +39,8 @@ public class PointeurControllerTest {
     void setup() {
         pointeurRepository.deleteAll();
         pointeurRepository.saveAll(List.of(
-                new Pointeur(null,"first",0f,0f,"","",""),
-                new Pointeur(null,"second",0f,0f,"","","")
+                new Pointer(null,"first",0f,0f,"","",""),
+                new Pointer(null,"second",0f,0f,"","","")
         ));
     }
 
@@ -55,7 +55,7 @@ public class PointeurControllerTest {
     @Test
     @WithMockUser(roles = "EDITOR")
     void shouldCreatePointeur() throws Exception {
-        Pointeur concert = new Pointeur(null,"new",0f,0f,"","","");
+        Pointer concert = new Pointer(null,"new",0f,0f,"","","");
 
         mockMvc.perform(post("/api/pointeurs/")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -79,8 +79,8 @@ public class PointeurControllerTest {
     @Test
     @WithMockUser(roles = "EDITOR")
     void shouldUpdateConcert() throws Exception {
-        Pointeur savedConcert = pointeurRepository.save(new Pointeur(null,"new",0f,0f,"","",""));
-        Pointeur updatedConcert = pointeurRepository.save(new Pointeur(null,"new",0f,0f,"","",""));
+        Pointer savedConcert = pointeurRepository.save(new Pointer(null,"new",0f,0f,"","",""));
+        Pointer updatedConcert = pointeurRepository.save(new Pointer(null,"new",0f,0f,"","",""));
 
         mockMvc.perform(put("/api/pointeurs/update/" + savedConcert.getId())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -93,7 +93,7 @@ public class PointeurControllerTest {
     @Test
     @WithMockUser(roles = "EDITOR")
     void shouldDeleteInformation() throws Exception {
-        Pointeur savedCPointeur = pointeurRepository.save(new Pointeur(null,"new",0f,0f,"","",""));
+        Pointer savedCPointeur = pointeurRepository.save(new Pointer(null,"new",0f,0f,"","",""));
 
         mockMvc.perform(delete("/api/pointeurs/"+savedCPointeur.getId()))
                 .andExpect(status().isOk())

@@ -1,7 +1,7 @@
 package com.capus.securedapi.controllers;
 
 
-import com.capus.securedapi.entity.Pointeur;
+import com.capus.securedapi.entity.Pointer;
 import com.capus.securedapi.exceptions.ApiException;
 import com.capus.securedapi.service.PointeurService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,7 +35,7 @@ public class PointeurController {
 
     @ApiResponses({
             @ApiResponse(responseCode = "201", content = { @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = Pointeur.class)) }),
+                    schema = @Schema(implementation = Pointer.class)) }),
             @ApiResponse(responseCode = "400 BadRequest", description = "Pointeur name is required")
     })
     @Operation(
@@ -44,8 +44,8 @@ public class PointeurController {
             tags = { "Editor only" })
     @PostMapping
     @PreAuthorize("hasRole('EDITOR')")
-    public ResponseEntity<Object> createPointeur(@Valid @RequestBody Pointeur pointeur) {
-        Pointeur createdPointeur =pointeurService.createPointeur(pointeur);
+    public ResponseEntity<Object> createPointeur(@Valid @RequestBody Pointer pointeur) {
+        Pointer createdPointeur =pointeurService.createPointeur(pointeur);
         return response(HttpStatus.CREATED,"Pointeur created",createdPointeur);
     }
 
@@ -56,14 +56,14 @@ public class PointeurController {
             description = "All access allowed.",
             tags = { "All access allowed" })
     // ALL authorized
-    public ResponseEntity<List<Pointeur>> getAllPointeurs() {
-        List<Pointeur> pointeurs = pointeurService.getAllPointeurs();
+    public ResponseEntity<List<Pointer>> getAllPointeurs() {
+        List<Pointer> pointeurs = pointeurService.getAllPointeurs();
         return ResponseEntity.ok(pointeurs);
     }
 
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = { @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = Pointeur.class)) }),
+                    schema = @Schema(implementation = Pointer.class)) }),
             @ApiResponse(responseCode = "400 a", description = "No Pointeur found with id: +id"),
             @ApiResponse(responseCode = "400 b", description = "Pointeur name is required")
     })
@@ -73,9 +73,9 @@ public class PointeurController {
             tags = { "Editor only" })
     @PutMapping("update/{id}")
     @PreAuthorize("hasRole('EDITOR')")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Pointeur request) throws ApiException {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Pointer request) throws ApiException {
 
-        Pointeur pointeurUpdated = pointeurService.update(id,request);
+        Pointer pointeurUpdated = pointeurService.update(id,request);
         return response(HttpStatus.CREATED,"Pointeur updated",pointeurUpdated);
     }
 

@@ -16,5 +16,5 @@ public class Information {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String message;
-    private boolean important;
+    private boolean priority;
 }
