@@ -46,14 +46,15 @@ public class ConcertServiceIplm implements ConcertService{
 				.orElseThrow(() -> new ApiException("Id:" + id + " Not found in database", HttpStatus.NOT_FOUND));
 
 		concert.setId(id);
-		concert.setNom(request.getNom());
+		concert.setName(request.getName());
 		concert.setImage(request.getImage());
+		concert.setImage_alt_text(request.getImage_alt_text());
 		concert.setDescription(request.getDescription());
-		concert.setOrigine(request.getOrigine());
+		concert.setOrigin(request.getOrigin());
 		concert.setDate(request.getDate());
-		concert.setHeure(request.getHeure());
+		concert.setTime(request.getTime());
 		concert.setScene(request.getScene());
-		concert.setLien(request.getLien());
+		concert.setLink(request.getLink());
 		return concertRepository.save(concert);
 
 	}

@@ -10,17 +10,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "pointeurs")
-public class Pointeur {
+@Table(name = "pointers")
+public class Pointer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
-    private String nom;
+    private String name;
     private float lon;
     private float lat;
     private String type;
     private String description;
-    private String lien;
+    private String link;
 }

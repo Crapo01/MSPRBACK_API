@@ -21,12 +21,13 @@ public class Concert {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nom;
+	private String name;
     private String image;
+    private String image_alt_text;
     private String description;
-    private String origine;
+    private String origin;
     private String date;
-    private String heure;
+    private String time;
     private String scene;
-    private String lien;
+    private String link;
 }
